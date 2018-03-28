@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title>Latihan Google Map API</title>
+        <style>
+            #map {
+                background-color: gray;
+                width: 100%;
+                height: 800px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+    </body>
+    <script>
+        function initMap(){
+            var center = {lat: -5.396447, lng: 105.265586};
+            var map=new google.maps.Map(document.getElementById('map'),{zoom:12,center:center});
+            // console.log(map);
+            var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        
+            var markers = locations.map(function(location, i) {
+                return new google.maps.Marker({
+                    position: location,
+                    label: labels[i % labels.length]
+                });
+                }); 
+            console.log(locations);
+            console.log(markers);
+            var markerCluster = new MarkerClusterer(map, markers,
+                {imagePath: 'images/m'});
+        
+            var d = markerCluster.distanceBetweenPoints_(markers[2].getPosition(),markers[4].getPosition());
+            console.log(markerCluster.getCalculator());
+            // var marker=new google.maps.Marker({position:center,map:map});
+            // console.log(marker);
+        }
+
+        var locations = [
+        {lat: -5.394400, lng: 105.290532},
+        {lat: -5.410123, lng: 105.260062}, 
+		{lat: -5.411148, lng: 105.277743},
+		{lat: -5.423282, lng: 105.251136},
+		{lat: -5.410123, lng: 105.260062},
+		{lat: -5.420206, lng: 105.251994},
+		{lat: -5.422155, lng: 105.270015},
+		{lat: -5.413867, lng: 105.258943},
+		{lat: -5.423181, lng: 105.250549}, 
+		{lat: -5.417029, ing: 105.252849},
+		{lat: -5.443858, ing: 105.265981},
+		{lat: -5.429418, ing: 105.258685}
+      ]
+	  
+	  
+      
+	  
+	  
+    </script>
+    <script async defer 
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAh6LGAlOMSkcpqAzUrv_Y6gp8e0bsBxoE&callback=initMap"></script>
+    <script src="src/markerclusterer.js">
+    </script>
+</html>
