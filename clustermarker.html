@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title>Sistem Informasi Sebaran Hotel di Bandara Lampung</title>
+        <style>
+            #map {
+                background-color: gray;
+                width: 100%;
+                height: 800px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+    </body>
+    <script>
+        function initMap(){
+    var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 10,
+    center: {lat: -5.400549, lng: 105.266272}
+     });
+     var infoWin = new google.maps.InfoWindow();
+            // console.log(map);
+            var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        
+            var markers = locations.map(function(location, i) {
+                var marker = new google.maps.Marker({
+                    position: location,
+                    label: labels[i % labels.length]
+                });
+     google.maps.event.addListener(marker, 'click', function(evt) {
+      infoWin.setContent(location.info);
+      infoWin.open(map, marker);
+    })
+    return marker;
+                }); 
+            console.log(locations);
+            console.log(markers);
+
+            var markerCluster = new MarkerClusterer(map, markers,
+                {imagePath: 'images/m'});
+        
+            var d = markerCluster.distanceBetweenPoints_(markers[2].getPosition(),markers[4].getPosition());
+            console.log(markerCluster.getCalculator());
+            // var marker=new google.maps.Marker({position:center,map:map});
+            // console.log(marker);
+        }
+
+        var locations = [
+        {lat: -5.429648, lng: 105.263495, info:"<h3>Marcopolo Hotel</h3>"}, 
+        {lat: -5.394400, lng: 105.290532, info:"<h3>Novotel Hotel </h3>"}, 
+        {lat: -5.410123, lng: 105.260062, info: "<h3>Horison</h3>"},
+        {lat: -5.411148, lng: 105.277743, info: "<h3>Asoka Luxury Hotel</h3>"}, 
+        {lat: -5.423282, lng: 105.251136, info: "<h3>POPI Hotel</h3>"}, 
+        {lat: -5.420206, lng: 105.251994, info: "<h3>Hotel anugrah </h3>"}, 
+        {lat: -5.422155, lng: 105.270015, info: "<h3>Batiqa Hotel</h3>"}, 
+        {lat: -5.413867, lng: 105.258943, info: "<h3>Amalia Hotel</h3>"}, 
+        {lat: -5.423181, lng: 105.250549, info: "<h3>Emersial hotel & ressort </h3>"},
+        {lat: -5.418962, lng: 105.259345, info: "<h3>yunan hotel</h3>"}, 
+        {lat: -5.443858, lng: 105.265981, info: "<h3> swiss-belhotel</h3>"}, 
+      ]
+    </script>
+    <script async defer 
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCpdz0TgY3HvulTmp-vHatHYnlUBaG8ug&callback=initMap"></script>
+    <script src="src/markerclusterer.js">
+    </script>
+</html>
